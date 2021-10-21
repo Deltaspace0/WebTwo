@@ -121,7 +121,7 @@
             </div>
             <div class="image-container">
                 <img id="grofik" src="image.png">
-                <div id="tochka"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Red_pog.png/9px-Red_pog.png"></div>
+                <div id="tochka"><img id="img-tochka" src="red.png"></div>
             </div>
         </td>
     </tr>

@@ -21,6 +21,10 @@ function fixR() {
     textFixer(this, 2, 5);
 }
 
+function localCheckHit(x, y, r) {
+    return (x >= 0 && y >= 0 && y <= r-2*x) || (x >= 0 && y <= 0 && x <= r && y >= -r/2) || (x <= 0 && y >= 0 && x*x+y*y <= r*r/4);
+}
+
 document.querySelector("#y-textinput").onkeyup = fixY;
 document.querySelector("#r-textinput").onkeyup = fixR;
 for (let i = 1; i < 10; i++) {
@@ -54,6 +58,12 @@ document.querySelector("#grofik").onclick = function(event) {
     document.querySelector("#xlabel").innerHTML = "X = "+(x)+":";
     document.querySelector("#x-value").value = x;
     document.querySelector("#y-textinput").value = y;
+    const hit = localCheckHit(x, y, r);
+    if (hit) {
+        document.querySelector("#img-tochka").setAttribute("src", "green.png");
+    } else {
+        document.querySelector("#img-tochka").setAttribute("src", "red.png");
+    }
 }
 
 function validateX() {
