@@ -50,7 +50,7 @@ document.querySelector("#grofik").onclick = function(event) {
     const dy = -112.328125;
     document.querySelector("#tochka").setAttribute("style", `position:relative;left:${dx+x}px;top:${dy+y}px;`);
     x /= cr/r;
-    y /= cr/r;
+    y /= -cr/r;
     document.querySelector("#xlabel").innerHTML = "X = "+(x)+":";
     document.querySelector("#x-value").value = x;
     document.querySelector("#y-textinput").value = y;
