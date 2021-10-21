@@ -1,5 +1,5 @@
-<%@ page import="history.RequestHistory" %>
-<%@ page import="history.RequestRow" %>
+<%@ page import="com.deltaspace.webtwo.history.RequestHistory" %>
+<%@ page import="com.deltaspace.webtwo.history.RequestRow" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false" %>
 <html>
@@ -9,214 +9,215 @@
     <title>Лабораторная работа по веб-программированию №2</title>
     <link rel="icon" href="smile.ico">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-size: 16px;
-            font-family: "Cormorant", serif;
-            background-color: #be9fed;
-        }
+    <link href="main.css" rel="stylesheet">
+<%--    <style>--%>
+<%--        body {--%>
+<%--            font-size: 16px;--%>
+<%--            font-family: "Cormorant", serif;--%>
+<%--            background-color: #be9fed;--%>
+<%--        }--%>
 
-        #main-grid {
-            width: 100%;
-            margin: auto;
-            border-spacing: 1em;
-        }
+<%--        #main-grid {--%>
+<%--            width: 100%;--%>
+<%--            margin: auto;--%>
+<%--            border-spacing: 1em;--%>
+<%--        }--%>
 
-        #table-plate {
-            width: 70%;
-            border-radius: 8px;
-        }
+<%--        #table-plate {--%>
+<%--            width: 70%;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        #header-plate {
-            padding: 1em 30px;
-            font-size: 32px;
-            color: #a3f7ff;
-            background-color: #6100c9;
-            border-radius: 8px;
-        }
+<%--        #header-plate {--%>
+<%--            padding: 1em 30px;--%>
+<%--            font-size: 32px;--%>
+<%--            color: #a3f7ff;--%>
+<%--            background-color: #6100c9;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        .content-plate {
-            padding: 0 0 20px;
-            vertical-align: top;
-            background-color: #ffffff;
-            border-radius: 8px;
-        }
+<%--        .content-plate {--%>
+<%--            padding: 0 0 20px;--%>
+<%--            vertical-align: top;--%>
+<%--            background-color: #ffffff;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        .plate-top {
-            display: inline-block;
-            width: 100%;
-            margin: 0;
-            padding: 0em 0;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #ffffff;
-            background-color: #e33030;
-            border-radius: 8px;
-        }
+<%--        .plate-top {--%>
+<%--            display: inline-block;--%>
+<%--            width: 100%;--%>
+<%--            margin: 0;--%>
+<%--            padding: 0em 0;--%>
+<%--            margin-bottom: 20px;--%>
+<%--            text-align: center;--%>
+<%--            color: #ffffff;--%>
+<%--            background-color: #e33030;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        .plate-top-title {
-            font-size: 20px;
-            font-weight: normal;
-        }
+<%--        .plate-top-title {--%>
+<%--            font-size: 20px;--%>
+<%--            font-weight: normal;--%>
+<%--        }--%>
 
-        .image-container {
-            text-align: center;
-        }
+<%--        .image-container {--%>
+<%--            text-align: center;--%>
+<%--        }--%>
 
-        #input-grid {
-            width: 95%;
-            margin: auto;
-            text-align: center;
-        }
+<%--        #input-grid {--%>
+<%--            width: 95%;--%>
+<%--            margin: auto;--%>
+<%--            text-align: center;--%>
+<%--        }--%>
 
-        .input-grid-label {
-            width: 12%;
-            font-weight: bold;
-        }
+<%--        .input-grid-label {--%>
+<%--            width: 12%;--%>
+<%--            font-weight: bold;--%>
+<%--        }--%>
 
-        .y-text {
-            width: 75%;
-            height: 20px;
-            margin: 2% 0;
-        }
+<%--        .y-text {--%>
+<%--            width: 75%;--%>
+<%--            height: 20px;--%>
+<%--            margin: 2% 0;--%>
+<%--        }--%>
 
-        .text-error {
-            border: 1px solid #ff0000;
-        }
+<%--        .text-error {--%>
+<%--            border: 1px solid #ff0000;--%>
+<%--        }--%>
 
-        .box-error {
-            color: #ff0000;
-        }
+<%--        .box-error {--%>
+<%--            color: #ff0000;--%>
+<%--        }--%>
 
-        .text-error::placeholder {
-            color: #ff0000;
-        }
+<%--        .text-error::placeholder {--%>
+<%--            color: #ff0000;--%>
+<%--        }--%>
 
-        .form-subtext {
-            padding-bottom: 2%;
-            font-size: 16px;
-        }
+<%--        .form-subtext {--%>
+<%--            padding-bottom: 2%;--%>
+<%--            font-size: 16px;--%>
+<%--        }--%>
 
-        .center-labeled {
-            display: inline-block;
-            position: relative;
-            margin: 0 1% 5%;
-            font-size: 16px;
-        }
+<%--        .center-labeled {--%>
+<%--            display: inline-block;--%>
+<%--            position: relative;--%>
+<%--            margin: 0 1% 5%;--%>
+<%--            font-size: 16px;--%>
+<%--        }--%>
 
-        .center-labeled label {
-            position: absolute;
-            top: 18px;
-            left: 6px;
-        }
+<%--        .center-labeled label {--%>
+<%--            position: absolute;--%>
+<%--            top: 18px;--%>
+<%--            left: 6px;--%>
+<%--        }--%>
 
-        .center-labeled {
-            left: 0;
-        }
+<%--        .center-labeled {--%>
+<%--            left: 0;--%>
+<%--        }--%>
 
-        .center-labeled .add-labeled {
-            left: 7px;
-        }
+<%--        .center-labeled .add-labeled {--%>
+<%--            left: 7px;--%>
+<%--        }--%>
 
-        .x-button {
-            color: #ffffff;
-            background-color: #ff5700;
-            border: none;
-            border-radius: 8px;
-        }
+<%--        .x-button {--%>
+<%--            color: #ffffff;--%>
+<%--            background-color: #ff5700;--%>
+<%--            border: none;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        .x-button:hover {
-            background-color: #ff003e;
-        }
+<%--        .x-button:hover {--%>
+<%--            background-color: #ff003e;--%>
+<%--        }--%>
 
-        .buttons {
-            margin-top: 3%;
-        }
+<%--        .buttons {--%>
+<%--            margin-top: 3%;--%>
+<%--        }--%>
 
-        .buttons::before {
-            content: "";
-            display: block;
-            height: 2px;
-            width: 300px;
-            margin: 0 auto 4%;
-            background-color: #ed6161;
-        }
+<%--        .buttons::before {--%>
+<%--            content: "";--%>
+<%--            display: block;--%>
+<%--            height: 2px;--%>
+<%--            width: 300px;--%>
+<%--            margin: 0 auto 4%;--%>
+<%--            background-color: #ed6161;--%>
+<%--        }--%>
 
-        .button {
-            height: 27px;
-            width: 90px;
-            color: #ffffff;
-            background-color: #ed6161;
-            border: none;
-            border-radius: 8px;
-        }
+<%--        .button {--%>
+<%--            height: 27px;--%>
+<%--            width: 90px;--%>
+<%--            color: #ffffff;--%>
+<%--            background-color: #ed6161;--%>
+<%--            border: none;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        .button:hover {
-            background-color: #514284;
-        }
+<%--        .button:hover {--%>
+<%--            background-color: #514284;--%>
+<%--        }--%>
 
-        #table-plate {
-            position: relative;
-        }
+<%--        #table-plate {--%>
+<%--            position: relative;--%>
+<%--        }--%>
 
-        .scroll-container {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            top: 54px;
-            width: 100%;
-            overflow-y: scroll;
-        }
+<%--        .scroll-container {--%>
+<%--            position: absolute;--%>
+<%--            bottom: 0;--%>
+<%--            right: 0;--%>
+<%--            top: 54px;--%>
+<%--            width: 100%;--%>
+<%--            overflow-y: scroll;--%>
+<%--        }--%>
 
-        #result-table {
-            width: 100%;
-            text-align: center;
-            border-collapse: collapse;
-            border-radius: 8px;
-        }
+<%--        #result-table {--%>
+<%--            width: 100%;--%>
+<%--            text-align: center;--%>
+<%--            border-collapse: collapse;--%>
+<%--            border-radius: 8px;--%>
+<%--        }--%>
 
-        #result-table tr {
-            height: 2em;
-        }
+<%--        #result-table tr {--%>
+<%--            height: 2em;--%>
+<%--        }--%>
 
-        #result-table tr:nth-child(2n-1) {
-            background-color: #ed6161;
-        }
+<%--        #result-table tr:nth-child(2n-1) {--%>
+<%--            background-color: #ed6161;--%>
+<%--        }--%>
 
-        #result-table tr:nth-child(2n):hover {
-            background-color: #e9e9e9;
-        }
+<%--        #result-table tr:nth-child(2n):hover {--%>
+<%--            background-color: #e9e9e9;--%>
+<%--        }--%>
 
-        #result-table tr:nth-child(2n-1):hover {
-            background-color: #d8aad3;
-        }
+<%--        #result-table tr:nth-child(2n-1):hover {--%>
+<%--            background-color: #d8aad3;--%>
+<%--        }--%>
 
-        #result-table tr.table-header:hover {
-            background-color: #514284;
-        }
+<%--        #result-table tr.table-header:hover {--%>
+<%--            background-color: #514284;--%>
+<%--        }--%>
 
-        .coords-col {
-            width: 12%;
-        }
+<%--        .coords-col {--%>
+<%--            width: 12%;--%>
+<%--        }--%>
 
-        .time-col {
-            width: 25%;
-        }
+<%--        .time-col {--%>
+<%--            width: 25%;--%>
+<%--        }--%>
 
-        .left-aligned {
-            float: left;
-            margin: 3.14%;
-        }
+<%--        .left-aligned {--%>
+<%--            float: left;--%>
+<%--            margin: 3.14%;--%>
+<%--        }--%>
 
-        .right-aligned {
-            float: right;
-        }
+<%--        .right-aligned {--%>
+<%--            float: right;--%>
+<%--        }--%>
 
-        .y-text:focus {
-            border-color: #ff3ddf;
-            outline-style: none;
-        }
-    </style>
+<%--        .y-text:focus {--%>
+<%--            border-color: #ff3ddf;--%>
+<%--            outline-style: none;--%>
+<%--        }--%>
+<%--    </style>--%>
 </head>
 
 <body>

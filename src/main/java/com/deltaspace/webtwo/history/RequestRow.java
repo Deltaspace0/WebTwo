@@ -1,4 +1,4 @@
-package history;
+package com.deltaspace.webtwo.history;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
