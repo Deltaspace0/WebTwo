@@ -55,6 +55,25 @@ public class AreaCheckServlet extends HttpServlet {
         long startTime = System.nanoTime();
         PrintWriter writer = response.getWriter();
         String p = request.getReader().lines().collect(Collectors.joining());
+        Cookie[] cookies = request.getCookies();
+        String uniqueid = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("uniqueid")) {
+                    uniqueid = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        if (uniqueid == null) {
+            sendError(writer,"а где куки?!", p);
+            return;
+        }
+        ServletContext servletContext = request.getServletContext();
+        if (p.equals("totalreset")) {
+            servletContext.setAttribute(uniqueid, new RequestHistory());
+            return;
+        }
         String[] parts = p.split("&");
         if (parts.length != 3) {
             sendError(writer, "POST payload не содержит ровно три куска данных", p);
@@ -108,22 +127,7 @@ public class AreaCheckServlet extends HttpServlet {
             sendError(writer, "r неправильный!", p);
             return;
         }
-        Cookie[] cookies = request.getCookies();
-        String uniqueid = null;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("uniqueid")) {
-                    uniqueid = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        if (uniqueid == null) {
-            sendError(writer,"а где куки?!", p);
-            return;
-        }
         boolean hit = checkHit(x, y, r);
-        ServletContext servletContext = request.getServletContext();
         Object requestHistoryOrNull = servletContext.getAttribute(uniqueid);
         RequestHistory requestHistory;
         if (requestHistoryOrNull == null) {

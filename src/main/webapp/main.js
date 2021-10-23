@@ -92,14 +92,16 @@ function validateY() {
     return true;
 }
 
-const resultTableOriginalHTML = document.getElementById('result-table').innerHTML;
 document.querySelectorAll('input[value="Всё удалить"]')[0].addEventListener('click', function() {
-    document.getElementById('result-table').innerHTML = resultTableOriginalHTML;
-    localStorage.clear();
+    $.ajax({
+        method: 'post',
+        dataType: 'text',
+        data: `totalreset`,
+        success: function () {
+            location.reload();
+        }
+    });
 });
-for (let i = 0; i < localStorage.length; i++) {
-    $('#result-table').append(localStorage.getItem(i));
-}
 
 $('#input-form').on('submit', function (event) {
     if (!(validateX() & validateY() & validateR())) {
