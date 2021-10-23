@@ -8,21 +8,13 @@ function textFixer(athis, a, b) {
         athis.value = athis.value.substr(0, athis.value.length - 1);
         x = parseFloat(athis.value);
     }
-    while ((athis.value[0] == '-' && (athis.value[1] == '.' || athis.value.lastIndexOf('.') > 2)) || (athis.value[0] != '-' && (athis.value[0] == '.' || athis.value.lastIndexOf('.') > 1))) {
+    while ((athis.value[0] === '-' && (athis.value[1] === '.' || athis.value.lastIndexOf('.') > 2)) || (athis.value[0] !== '-' && (athis.value[0] === '.' || athis.value.lastIndexOf('.') > 1))) {
         athis.value = athis.value.substr(0, athis.value.lastIndexOf('.'));
     }
 }
 
-function fixY() {
-    textFixer(this, -5, 5);
-}
-
-function fixR() {
-    textFixer(this, 2, 5);
-}
-
-document.querySelector("#y-textinput").onkeyup = fixY;
-document.querySelector("#r-textinput").onkeyup = fixR;
+document.querySelector("#y-textinput").onkeyup = function () { textFixer(this, -5, 5); }
+document.querySelector("#r-textinput").onkeyup = function () { textFixer(this, 2, 5);}
 for (let i = 1; i < 10; i++) {
     document.querySelector("#x-button"+i).onclick = function() {
         document.querySelector("#xlabel").innerHTML = "X = "+(i-5)+":";
@@ -51,7 +43,7 @@ document.querySelector("#grofik").onclick = function(event) {
     document.querySelector("#tochka").setAttribute("style", `position:relative;left:${dx+x}px;top:${dy+y}px;`);
     x /= cr/r;
     y /= -cr/r;
-    document.querySelector("#xlabel").innerHTML = "X = "+(x)+":";
+    document.querySelector("#xlabel").innerHTML = "X = "+Math.floor(x*1000)/1000+":";
     document.querySelector("#x-value").value = x;
     document.querySelector("#y-textinput").value = y;
     $.ajax({
@@ -67,6 +59,22 @@ document.querySelector("#grofik").onclick = function(event) {
             }
         }
     });
+}
+
+function setDot(x, y, r, hit) {
+    const cx = 105.25;
+    const cy = 107.328125;
+    const cr = 80;
+    const dx = -1;
+    const dy = -112.328125;
+    x *= cr/r;
+    y *= -cr/r;
+    document.querySelector("#tochka").setAttribute("style", `position:relative;left:${dx+x}px;top:${dy+y}px;`);
+    if (hit) {
+        document.querySelector("#img-tochka").setAttribute("src", "green.png");
+    } else {
+        document.querySelector("#img-tochka").setAttribute("src", "red.png");
+    }
 }
 
 function validateX() {
